@@ -43,10 +43,10 @@
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="137.18140929535232"/>
         </scene>
-        <!--View Controller-->
+        <!--Tweets View Controller-->
         <scene sceneID="Tjv-YW-RZn">
             <objects>
-                <viewController id="Ahc-uE-k1J" sceneMemberID="viewController">
+                <viewController id="Ahc-uE-k1J" customClass="TweetsViewController" customModule="TwitterClone" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KwB-f5-3c4"/>
                         <viewControllerLayoutGuide type="bottom" id="AS7-Du-HMC"/>
@@ -56,7 +56,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="yDw-Sm-rmy"/>
+                    <navigationItem key="navigationItem" id="yDw-Sm-rmy">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="BBf-WC-vGh">
+                            <connections>
+                                <action selector="onLogoutButton:" destination="Ahc-uE-k1J" id="dXm-XJ-xxd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7lc-v6-0Nd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -65,7 +71,7 @@
         <!--Navigation Controller-->
         <scene sceneID="9b3-Rc-2bm">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oRK-kx-hA2" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TweetsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="oRK-kx-hA2" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="87P-dy-vGT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
