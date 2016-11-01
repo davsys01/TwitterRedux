@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import FTIndicator
 
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var tweets: [Tweet]?
+    
+    var refreshControl: UIRefreshControl!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -23,11 +26,25 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.estimatedRowHeight = 65
+        tableView.rowHeight = UITableViewAutomaticDimension
         
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(self.getTweetsData), for: UIControlEvents.valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
+        
+        getTweetsData()
+    }
+    
+    func getTweetsData() {
+        FTIndicator.showProgressWithmessage("Loading Tweets...")
         TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets: [Tweet]) in
+            FTIndicator.dismissProgress()
+            self.refreshControl.endRefreshing()
             self.tweets = tweets
             self.tableView.reloadData()
         }, failure: { (error: Error) in
+            FTIndicator.dismissProgress()
             print("Error = \(error.localizedDescription)")
         })
     }
@@ -46,10 +63,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         let tweet = (tweets?[indexPath.row])! as Tweet
-        cell.textLabel?.text = tweet.text
-        
+
+        cell.tweet = tweet
+
         return cell
     }
     

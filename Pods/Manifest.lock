@@ -16,15 +16,24 @@ PODS:
     - AFNetworking/NSURLSession
   - BDBOAuth1Manager (2.0.0):
     - AFNetworking/NSURLSession (~> 3.0.0)
+  - FTIndicator (1.1.5):
+    - FTIndicator/FTNotificationIndicator (= 1.1.5)
+    - FTIndicator/FTProgressIndicator (= 1.1.5)
+    - FTIndicator/FTToastIndicator (= 1.1.5)
+  - FTIndicator/FTNotificationIndicator (1.1.5)
+  - FTIndicator/FTProgressIndicator (1.1.5)
+  - FTIndicator/FTToastIndicator (1.1.5)
 
 DEPENDENCIES:
   - AFNetworking
   - BDBOAuth1Manager
+  - FTIndicator
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   BDBOAuth1Manager: 92d17d06f8a648602962304cd2f35ae7394fa001
+  FTIndicator: 8b9885b84340a19029ad13672add3bb8183feba8
 
-PODFILE CHECKSUM: 744266451073cdffb39deab3f58a8c86325c075c
+PODFILE CHECKSUM: aaa95f26604c1268afb09db361ee2f80fa61dcb3
 
 COCOAPODS: 1.0.1

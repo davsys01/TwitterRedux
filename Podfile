@@ -8,4 +8,5 @@ target 'TwitterClone' do
   # Pods for TwitterClone
   pod 'AFNetworking'
   pod 'BDBOAuth1Manager'
+  pod 'FTIndicator'
 end
