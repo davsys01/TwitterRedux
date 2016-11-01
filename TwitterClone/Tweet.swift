@@ -10,15 +10,17 @@ import UIKit
 
 class Tweet: NSObject {
     
+    var idStr: String?
     var text: String?
     var timeStamp: Date?
     var retweetCount: Int = 0
-    var favoritesCount: Int = 0
+    var favoriteCount: Int = 0
     var profilePicture: String?
     var userName: String?
     var userScreenName: String?
     
     init(dictionary: NSDictionary) {
+        idStr = dictionary["id_str"] as? String
         text = dictionary["text"] as? String
         
         let timeStampString = dictionary["created_at"] as? String
@@ -29,7 +31,7 @@ class Tweet: NSObject {
         }
         
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
-        favoritesCount = (dictionary["favourites_count"] as? Int) ?? 0
+        favoriteCount = (dictionary["favorite_count"] as? Int) ?? 0
         if let userDictionary = dictionary["user"] as? NSDictionary {
             userName = userDictionary["name"] as? String
             userScreenName = userDictionary["screen_name"] as? String

@@ -43,6 +43,14 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         getTweetsData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPath, animated: false)
+        }
+    }
+    
     func onTweetSucceeded(tweet: Tweet) {
         self.tweets?.insert(tweet, at: 0)
         self.tableView.reloadData()
@@ -83,15 +91,14 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showTweet" {
+            let tweetVC = segue.destination as! TweetViewController
+            
+            if let indexPath = tableView.indexPath(for: sender as! TweetCell) {
+                let tweet = self.tweets![indexPath.row]
+                tweetVC.tweet = tweet
+            }
+        }
     }
-    */
-
 }

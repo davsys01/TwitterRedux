@@ -37,7 +37,8 @@ class TweetCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        profilePicture.layer.cornerRadius = 5
+        profilePicture.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
