@@ -30,10 +30,10 @@ class Tweet: NSObject {
         
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
         favoritesCount = (dictionary["favourites_count"] as? Int) ?? 0
-        profilePicture = dictionary["profile_background_image_url_https"] as? String
         if let userDictionary = dictionary["user"] as? NSDictionary {
             userName = userDictionary["name"] as? String
             userScreenName = userDictionary["screen_name"] as? String
+            profilePicture = userDictionary["profile_background_image_url_https"] as? String
         }
     }
     

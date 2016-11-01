@@ -8,12 +8,17 @@
 
 import UIKit
 
+protocol ComposeViewControllerDelegate {
+    func onTweetSucceeded(tweet: Tweet)
+}
+
 class ComposeViewController: UIViewController {
     
     @IBOutlet weak var tweetText: UITextField!
     @IBOutlet weak var lengthLabel: UILabel!
     
     let tweetLength: Int = 140
+    var delegate: ComposeViewControllerDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +30,7 @@ class ComposeViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
     @IBAction func updateCount(_ sender: Any) {
         let length = tweetText.text?.characters.count
         lengthLabel.text = "\(tweetLength - length!)"
@@ -39,12 +45,17 @@ class ComposeViewController: UIViewController {
         let tweet = Tweet(dictionary: tweetDictionary)
         
         TwitterClient.sharedInstance?.composeTweet(tweet: tweet, success: { (tweet: Tweet) in
-            if let navController = self.navigationController {
-                navController.popViewController(animated: true)
-            }
+            self.tweetText.resignFirstResponder()
+            self.delegate.onTweetSucceeded(tweet: tweet)
+            self.dismiss(animated: true, completion: nil)
         }, failure: { (error: Error) in
             print("Error: \(error.localizedDescription)")
         })
+    }
+    
+    @IBAction func onCancelButton(_ sender: Any) {
+        tweetText.resignFirstResponder()
+        dismiss(animated: true, completion: nil)
     }
 
     /*

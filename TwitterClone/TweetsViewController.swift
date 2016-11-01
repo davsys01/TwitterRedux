@@ -9,7 +9,7 @@
 import UIKit
 import FTIndicator
 
-class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate {
     
     var tweets: [Tweet]?
     
@@ -20,13 +20,20 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     @IBAction func onLogoutButton(_ sender: Any) {
         TwitterClient.sharedInstance?.logout()
     }
+    
+    @IBAction func onComposeButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let composeViewController = storyboard.instantiateViewController(withIdentifier: "ComposeViewController") as! ComposeViewController
+        composeViewController.delegate = self
+        self.present(composeViewController, animated: true, completion: nil)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.estimatedRowHeight = 65
+        tableView.estimatedRowHeight = 58
         tableView.rowHeight = UITableViewAutomaticDimension
         
         refreshControl = UIRefreshControl()
@@ -34,6 +41,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.insertSubview(refreshControl, at: 0)
         
         getTweetsData()
+    }
+    
+    func onTweetSucceeded(tweet: Tweet) {
+        self.tweets?.insert(tweet, at: 0)
+        self.tableView.reloadData()
     }
     
     func getTweetsData() {
