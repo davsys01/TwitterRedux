@@ -54,7 +54,29 @@
                     <view key="view" contentMode="scaleToFill" id="o8Z-eo-wdZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tkP-Yp-DYb">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetCell" id="fK6-gR-8p0">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fK6-gR-8p0" id="tGT-Rv-pv5">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="AS7-Du-HMC" firstAttribute="top" secondItem="tkP-Yp-DYb" secondAttribute="bottom" id="0Md-qa-RhY"/>
+                            <constraint firstItem="tkP-Yp-DYb" firstAttribute="top" secondItem="o8Z-eo-wdZ" secondAttribute="top" id="7kn-pa-wXx"/>
+                            <constraint firstItem="tkP-Yp-DYb" firstAttribute="leading" secondItem="o8Z-eo-wdZ" secondAttribute="leading" id="Tvu-5m-uxJ"/>
+                            <constraint firstAttribute="trailing" secondItem="tkP-Yp-DYb" secondAttribute="trailing" id="lAy-aL-wD6"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="yDw-Sm-rmy">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="BBf-WC-vGh">
@@ -63,10 +85,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="tkP-Yp-DYb" id="VQd-pD-FMY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7lc-v6-0Nd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1665" y="137"/>
+            <point key="canvasLocation" x="1664.8" y="136.28185907046478"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9b3-Rc-2bm">

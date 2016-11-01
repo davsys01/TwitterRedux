@@ -24,6 +24,7 @@
 		634885601DC6F7C900C945FF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		634885621DC6F7E100C945FF /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		634885641DC6FE3F00C945FF /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
+		63ADBF881DC8347C00D93CA5 /* TwitterClone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TwitterClone.entitlements; sourceTree = "<group>"; };
 		63B4DB8B1DC6E2F30082BFAE /* TwitterClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63B4DB8E1DC6E2F30082BFAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63B4DB931DC6E2F30082BFAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -110,6 +111,7 @@
 		63B4DB8D1DC6E2F30082BFAE /* TwitterClone */ = {
 			isa = PBXGroup;
 			children = (
+				63ADBF881DC8347C00D93CA5 /* TwitterClone.entitlements */,
 				6348855F1DC6F7B600C945FF /* API */,
 				6348855E1DC6F7AF00C945FF /* Views */,
 				6348855D1DC6F7A700C945FF /* Models */,
@@ -169,6 +171,11 @@
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = RAKMRPVVS8;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -383,6 +390,7 @@
 			baseConfigurationReference = 6947E3EF7A823CEA0B8FD42B /* Pods-TwitterClone.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TwitterClone/TwitterClone.entitlements;
 				DEVELOPMENT_TEAM = RAKMRPVVS8;
 				INFOPLIST_FILE = TwitterClone/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -397,6 +405,7 @@
 			baseConfigurationReference = 7BF1D5F262024513058C123A /* Pods-TwitterClone.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TwitterClone/TwitterClone.entitlements;
 				DEVELOPMENT_TEAM = RAKMRPVVS8;
 				INFOPLIST_FILE = TwitterClone/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

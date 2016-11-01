@@ -12,6 +12,7 @@ class User: NSObject {
     
     static let userDidLogoutNotification = "UserDidLogout"
     
+    var uid: String?
     var name: String?
     var screenName: String?
     var profileUrl: URL?
@@ -20,6 +21,7 @@ class User: NSObject {
     
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
+        uid = dictionary["id_str"] as? String
         name = dictionary["name"] as? String
         screenName = dictionary["screen_name"] as? String
         let profileUrlString = dictionary["profile_image_url_https"] as? String
@@ -29,18 +31,13 @@ class User: NSObject {
         tagline = dictionary["description"] as? String
     }
     
-    static var _currentUser: User?
+    static var _currentUser: String?
     
-    class var currentUser: User? {
+    class var currentUser: String? {
         get {
             if _currentUser == nil {
                 let defaults = UserDefaults.standard
-                let userData = defaults.object(forKey: "currentUserData") as? Data
-                
-                if let userData = userData {
-                    let dictionary = try! JSONSerialization.jsonObject(with: userData, options: []) as! NSDictionary
-                    _currentUser = User(dictionary: dictionary)
-                }
+                _currentUser = defaults.string(forKey: "currentUser")
             }
             
             return _currentUser
@@ -49,10 +46,9 @@ class User: NSObject {
             _currentUser = user
             let defaults = UserDefaults.standard
             if let user = user {
-                let data = try! JSONSerialization.data(withJSONObject: user.dictionary!, options: [])
-                defaults.set(data, forKey: "currentUserData")
+                defaults.set(user, forKey: "currentUser")
             } else {
-                defaults.set(nil, forKey: "currentUserData")
+                defaults.set(nil, forKey: "currentUser")
             }
             defaults.synchronize()
         }
