@@ -16,12 +16,23 @@ class ComposeViewController: UIViewController {
     
     @IBOutlet weak var tweetText: UITextField!
     @IBOutlet weak var lengthLabel: UILabel!
+    @IBOutlet weak var replyToLabel: UILabel!
+    @IBOutlet weak var replyToUser: UILabel!
     
     let tweetLength: Int = 140
     var delegate: ComposeViewControllerDelegate!
+    var tweetToReply: Tweet?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if tweetToReply != nil {
+            replyToLabel.isHidden = false
+            replyToUser.isHidden = false
+            if let screenName = tweetToReply?.userScreenName {
+                replyToUser.text = "@\(screenName)"
+            }
+        }
         
         tweetText.becomeFirstResponder()
     }
@@ -43,6 +54,10 @@ class ComposeViewController: UIViewController {
     @IBAction func onTweetButton(_ sender: Any) {
         let tweetDictionary = ["text":tweetText.text!] as NSDictionary
         let tweet = Tweet(dictionary: tweetDictionary)
+        
+        if tweetToReply != nil {
+            tweet.replyToId  = tweetToReply?.idStr
+        }
         
         TwitterClient.sharedInstance?.composeTweet(tweet: tweet, success: { (tweet: Tweet) in
             self.tweetText.resignFirstResponder()

@@ -53,7 +53,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     func onTweetSucceeded(tweet: Tweet) {
         self.tweets?.insert(tweet, at: 0)
-        self.tableView.reloadData()
+        getTweetsData()
     }
     
     func getTweetsData() {

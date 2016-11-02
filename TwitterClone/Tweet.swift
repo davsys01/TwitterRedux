@@ -18,6 +18,7 @@ class Tweet: NSObject {
     var profilePicture: String?
     var userName: String?
     var userScreenName: String?
+    var replyToId: String?
     
     init(dictionary: NSDictionary) {
         idStr = dictionary["id_str"] as? String

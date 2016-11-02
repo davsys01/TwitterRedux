@@ -24,6 +24,8 @@ class TweetViewController: UIViewController {
     @IBOutlet weak var rtCount: UILabel!
     @IBOutlet weak var likeCount: UILabel!
     
+    var tweetsVC: TweetsViewController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -59,6 +61,14 @@ class TweetViewController: UIViewController {
         })
     }
 
+    @IBAction func onReplyButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let composeViewController = storyboard.instantiateViewController(withIdentifier: "ComposeViewController") as! ComposeViewController
+        composeViewController.delegate = tweetsVC
+        composeViewController.tweetToReply = tweet
+        self.present(composeViewController, animated: true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

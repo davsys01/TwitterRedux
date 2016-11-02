@@ -25,9 +25,11 @@ class TweetCell: UITableViewCell {
 //            screenName.text = "@\(tweet?.userScreenName)"
             userName.text = tweet?.userName
 
-            let formatter = DateFormatter()
-            formatter.dateFormat = "MMM d"
-            timeStamp.text = formatter.string(from: (tweet?.timeStamp)!)
+            if let timeStampDate = tweet?.timeStamp {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "MMM d"
+                timeStamp.text = formatter.string(from: timeStampDate)
+            }
             
             if let profileImage = tweet?.profilePicture {
                 profilePicture.setImageWith(URL(string: profileImage)!)

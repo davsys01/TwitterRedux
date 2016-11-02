@@ -82,6 +82,9 @@ class TwitterClient: BDBOAuth1SessionManager {
         var parameters = [String : AnyObject]()
         
         parameters["status"] = tweet.text as AnyObject!
+        if tweet.replyToId != "" {
+            parameters["in_reply_to_status_id"] = tweet.replyToId as AnyObject!
+        }
         
         post("1.1/statuses/update.json", parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
             success(tweet)
