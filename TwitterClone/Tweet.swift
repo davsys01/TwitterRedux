@@ -36,7 +36,7 @@ class Tweet: NSObject {
         if let userDictionary = dictionary["user"] as? NSDictionary {
             userName = userDictionary["name"] as? String
             userScreenName = userDictionary["screen_name"] as? String
-            profilePicture = userDictionary["profile_background_image_url_https"] as? String
+            profilePicture = userDictionary["profile_image_url_https"] as? String
         }
     }
     

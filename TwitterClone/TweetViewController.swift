@@ -85,6 +85,9 @@ class TweetViewController: UIViewController {
         formatter.dateFormat = "MMM d"
         timeStamp.text = formatter.string(from: (tweet?.timeStamp)!)
         
+        profilePicture.layer.cornerRadius = 25
+        profilePicture.clipsToBounds = true
+        
         if let profileImage = tweet?.profilePicture {
             profilePicture.setImageWith(URL(string: profileImage)!)
         }
