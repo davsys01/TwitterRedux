@@ -10,11 +10,28 @@ import UIKit
 import BDBOAuth1Manager
 
 class LoginViewController: UIViewController {
+    
+    @IBOutlet weak var logoImage: UIImageView!
+    @IBOutlet weak var loginButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        logoImage.alpha = 0
+        loginButton.alpha = 0
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animate(withDuration: 1.5, animations: {
+            self.logoImage.alpha = 1
+            self.loginButton.alpha = 1
+        })
     }
 
     override func didReceiveMemoryWarning() {
