@@ -19,6 +19,7 @@ class Tweet: NSObject {
     var userName: String?
     var userScreenName: String?
     var replyToId: String?
+    var userProfile: User?
     
     init(dictionary: NSDictionary) {
         idStr = dictionary["id_str"] as? String
@@ -34,6 +35,7 @@ class Tweet: NSObject {
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
         favoriteCount = (dictionary["favorite_count"] as? Int) ?? 0
         if let userDictionary = dictionary["user"] as? NSDictionary {
+            userProfile = User(dictionary: userDictionary)
             userName = userDictionary["name"] as? String
             userScreenName = userDictionary["screen_name"] as? String
             profilePicture = userDictionary["profile_image_url_https"] as? String

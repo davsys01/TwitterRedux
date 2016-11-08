@@ -59,7 +59,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
             let dictionaries = response as! [NSDictionary]
             let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
-            print(dictionaries)
+//            print(dictionaries)
             
             success(tweets)
         }, failure: { (task: URLSessionDataTask?, error: Error) in
@@ -118,5 +118,18 @@ class TwitterClient: BDBOAuth1SessionManager {
             failure(error)
         })
     }
-
+    
+    func mentionsTimeline(success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
+        var parameters = [String : AnyObject]()
+        parameters["count"] = 40 as AnyObject
+        
+        get("1.1/statuses/mentions_timeline.json", parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            let dictionaries = response as! [NSDictionary]
+            let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
+            
+            success(tweets)
+        }, failure: { (task: URLSessionDataTask?, error: Error) in
+            failure(error)
+        })
+    }
 }

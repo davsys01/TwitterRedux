@@ -1,36 +1,30 @@
 //
-//  TweetCell.swift
+//  MentionCell.swift
 //  TwitterClone
 //
-//  Created by David Bocardo on 10/31/16.
+//  Created by David Bocardo on 11/7/16.
 //  Copyright © 2016 David Bocardo. All rights reserved.
 //
 
 import UIKit
 
-protocol TweetCellProtocol {
-    func loadViewController(controller: ProfileViewController!)
-}
-
-class TweetCell: UITableViewCell {
+class MentionCell: UITableViewCell {
     
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var screenName: UILabel!
     @IBOutlet weak var timeStamp: UILabel!
-    @IBOutlet weak var tweetText: UILabel!
-    
-    var delegate: TweetCellProtocol?
-    
+    @IBOutlet weak var tweetText: UILabel!    
+
     var tweet: Tweet? {
         didSet {
             tweetText.text = tweet?.text
             if let screen = tweet?.userScreenName {
                 screenName.text = "@\(screen)"
             }
-//            screenName.text = "@\(tweet?.userScreenName)"
+            //            screenName.text = "@\(tweet?.userScreenName)"
             userName.text = tweet?.userName
-
+            
             if let timeStampDate = tweet?.timeStamp {
                 let formatter = DateFormatter()
                 formatter.dateFormat = "MMM d"
@@ -42,14 +36,7 @@ class TweetCell: UITableViewCell {
             }
         }
     }
-    
-    @IBAction func onImagePressed(_ sender: Any) {
-        let profileVC = ProfileViewController()
-        profileVC.showCurrentUser = false
-        profileVC.currentUser = tweet?.userProfile
-        delegate?.loadViewController(controller: profileVC)
-    }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         profilePicture.layer.cornerRadius = 25

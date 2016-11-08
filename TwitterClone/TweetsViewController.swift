@@ -9,7 +9,7 @@
 import UIKit
 import FTIndicator
 
-class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate {
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate, TweetCellProtocol {
     
     var tweets: [Tweet]?
     
@@ -57,14 +57,15 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func getTweetsData() {
-        FTIndicator.showProgressWithmessage("Loading Tweets...")
+//        FTIndicator.showProgressWithmessage("Loading Tweets...")
         TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets: [Tweet]) in
-            FTIndicator.dismissProgress()
+//            FTIndicator.dismissProgress()
             self.refreshControl.endRefreshing()
             self.tweets = tweets
             self.tableView.reloadData()
         }, failure: { (error: Error) in
-            FTIndicator.dismissProgress()
+//            FTIndicator.dismissProgress()
+            self.refreshControl.endRefreshing()
             print("Error = \(error.localizedDescription)")
         })
     }
@@ -87,8 +88,16 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         let tweet = (tweets?[indexPath.row])! as Tweet
 
         cell.tweet = tweet
+        cell.delegate = self
 
         return cell
+    }
+    
+    func loadViewController(controller: ProfileViewController!) {
+        self.willMove(toParentViewController: controller)
+        self.show(controller, sender: self)
+        //self.present(controller, animated: true, completion: nil)
+        self.didMove(toParentViewController: controller)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
